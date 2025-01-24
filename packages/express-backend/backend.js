@@ -130,7 +130,6 @@ app.post("/users", (req, res) => {
   req.body.id = newid;
   const addsuc = addUser(userToAdd);
   if (addsuc) {
-    res.status(201).send("Content created.");
+    res.status(201).send("Content created.").send(userToAdd);
   }
-  res.send();
 });
