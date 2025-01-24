@@ -65,6 +65,11 @@ const addUser = (user) => {
   return user;
 };
 
+const deleteUser = (index) => {
+  users["users_list"].splice(index, 1);
+};
+
+
 
 // GET FUNCTIONS /////
 
@@ -90,11 +95,42 @@ app.get("/users/:id", (req, res) => {
   }
 });
 
+app.get("/users", (req, res) => {
+  const name = req.query.name;
+  const job = req.query.job;
+  if ((name != undefined) & (job != undefined)) {
+    let result = users["users_list"].findIndex(item => item.job === job).findUserByName(name);
+    // result = { users_list: result };
+    res.send(result);
+  } else {
+    res.send(users);
+  }
+});
+
+
+// DELETE FUNCTIONS /////////////////
+
+app.delete("/users/:id", (req, res) => {
+  const id = req.params["id"];
+  const index = users["users_list"].findIndex(item => item.id === id);
+  if (index === -1) {
+    res.status(404).send("Resource not found.");
+  } else {
+    deleteUser(index);
+  }
+  res.send();
+});
+
 
 // POST FUNCTIONS ///////
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
+  let newid = Math.round(Math.random() * 99999).toString();
+  req.body.id = newid;
+  const addsuc = addUser(userToAdd);
+  if (addsuc) {
+    res.status(201).send("Content created.");
+  }
   res.send();
 });
