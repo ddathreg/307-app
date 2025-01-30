@@ -73,9 +73,25 @@ const deleteUser = (index) => {
 
 // GET FUNCTIONS /////
 
+// app.get("/users", (req, res) => {
+//   const name = req.query.name;
+//   if (name != undefined) {
+//     let result = findUserByName(name);
+//     result = { users_list: result };
+//     res.send(result);
+//   } else {
+//     res.send(users);
+//   }
+// });
+
 app.get("/users", (req, res) => {
   const name = req.query.name;
-  if (name != undefined) {
+  const job = req.query.job;
+  if ((name != undefined) & (job != undefined)){
+    let result = findUserByName(name).find(user => user.job === job);
+    result = { users_list: result };
+    res.send(result);
+  } else if (name != undefined) {
     let result = findUserByName(name);
     result = { users_list: result };
     res.send(result);
@@ -95,17 +111,6 @@ app.get("/users/:id", (req, res) => {
   }
 });
 
-app.get("/users", (req, res) => {
-  const name = req.query.name;
-  const job = req.query.job;
-  if ((name != undefined) & (job != undefined)) {
-    let result = users["users_list"].findIndex(item => item.job === job).findUserByName(name);
-    // result = { users_list: result };
-    res.send(result);
-  } else {
-    res.send(users);
-  }
-});
 
 
 // DELETE FUNCTIONS /////////////////
