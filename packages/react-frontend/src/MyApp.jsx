@@ -12,6 +12,21 @@ function MyApp() {
     setCharacters(updated);
   }
 
+  // function removeOneCharacter(index) {
+  //   const updated = characters.filter((character, i) => {
+  //     return i !== index;
+  //   });
+  //   let id = updated.id;
+  //   const promise = fetch(`http://localhost:8000/users/ ${id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     }
+  //   });
+  //   setCharacters(updated);
+  //   return promise;
+  // }
+
   function updateList(person) {
     postUser(person)
       .then(() => setCharacters([...characters, person]))
