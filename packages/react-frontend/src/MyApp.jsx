@@ -16,14 +16,17 @@ function MyApp() {
   //   const updated = characters.filter((character, i) => {
   //     return i !== index;
   //   });
-  //   let id = updated.id;
+  //   setCharacters(updated);
+  //   const toDelete = characters.filter((character, i) => {
+  //     return i === index;
+  //   });
+  //   let id = toDelete._id;
   //   const promise = fetch(`http://localhost:8000/users/ ${id}`, {
   //     method: "DELETE",
   //     headers: {
   //       "Content-Type": "application/json",
   //     }
   //   });
-  //   setCharacters(updated);
   //   return promise;
   // }
 
