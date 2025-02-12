@@ -149,7 +149,7 @@ app.post("/users", (req, res) => {
   let newid = Math.round(Math.random() * 99999).toString();
   req.body.id = newid;
   const addsuc = addUser(userToAdd);
-  addsuc.then((userToAdd) => res.status(201).send("Content created.").send(userToAdd));
+  addsuc.then(() => res.status(201).send("Content created."));
   // if (addsuc) {
   //   res.status(201).send("Content created.").send(userToAdd);
   // }
